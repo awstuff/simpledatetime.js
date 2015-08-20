@@ -9,7 +9,7 @@ The following formats are supported:
 - "iso" causes the output to be formatted in iso style, such as *2015-08-19*
 
 ```` js
-console.log(simpleDate("2013-12-04", "de");    // output: 4. Dezember 2013
-console.log(simpleDate(new Date(), "en");    // output: August 20, 2015
-console.log(simpleDate(new Date(2011,10,3), "iso");    // output: 2011-11-03
+console.log(simpleDate("2013-12-04", "de"));    // output: 4. Dezember 2013
+console.log(simpleDate(new Date(), "en"));    // output: August 20, 2015
+console.log(simpleDate(new Date(2011,10,3)), "iso");    // output: 2011-11-03
 ````
