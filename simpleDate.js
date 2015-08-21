@@ -41,10 +41,10 @@ function simpleDate (date, format) {
 		]
 	};
 	// basic type checks:
-	if (typeof date == "string") {
+	if (typeof date === "string") {
 		date = new Date(date);
 	}
-	if (toString.call(date) != "[object Date]" || date.toString().toLowerCase() == "invalid date") {
+	if (toString.call(date) !== "[object Date]" || date.toString().toLowerCase() === "invalid date") {
 		throw "simpleDate.js: invalid date";
 		return;
 	}
