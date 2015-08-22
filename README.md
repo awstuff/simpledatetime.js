@@ -7,6 +7,7 @@ The following formats are supported:
 - "en" causes the output to be formatted in a us type format, such as *August 19, 2015*
 - "de" causes the output to be formatted in a german type format, such as *19. August 2015*
 - "iso" causes the output to be formatted in iso style, such as *2015-08-19*
+
 Passing *true* as third parameter stops errors from being thrown when date or format string are incorrect
 
 ```` js
