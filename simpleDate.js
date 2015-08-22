@@ -10,8 +10,6 @@
 */
 
 function simpleDate (date, format, noerrors) {
-	console.log(date);
-	console.log(format);
 	var months = {
 		us : [
 			"January",
