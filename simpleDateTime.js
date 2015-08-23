@@ -7,7 +7,7 @@
 * Copyright 2015 Adrian Wirth
 * Released under the MIT license
 *
-* Date: 2015-08-20
+* Date: 2015-08-23
 */
 
 function simpleDateTime (date, format, displaytime, noerrors) {
