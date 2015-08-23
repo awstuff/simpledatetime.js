@@ -10,7 +10,7 @@ The following formats are supported:
 
 If you wish to include time instead of date only, all you have to do is pass *true* as the third parameter. The time will simply be appended to the date.
 
-Passing *true* as the fourth parameter stops errors from being thrown when date or format string are incorrect, which in my case has been useful when using simpleDateTime within an AngularJS filter.
+Passing *true* as the fourth parameter stops errors from being thrown when date or format string are invalid, which in my case has been useful when using simpleDateTime within an AngularJS filter.
 
 ```` js
 console.log(simpleDateTime("2013-12-04", "de"));    // output: 4. Dezember 2013
