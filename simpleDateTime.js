@@ -1,15 +1,16 @@
 /**
-* simpleDate.js
+* simpleDateTime.js
 *
 * allows some simple date formatting as us-type-format (pass "us" as second param), de-type-format (pass "de") or iso-format (pass "iso")
-* passing true as third parameter stops errors from being thrown when date or format string are incorrect
+* passing true as third parameter also returns the corresponding time
+* passing true as fourth parameter stops errors from being thrown when date or format string are incorrect
 * Copyright 2015 Adrian Wirth
 * Released under the MIT license
 *
 * Date: 2015-08-20
 */
 
-function simpleDate (date, format, noerrors) {
+function simpleDateTime (date, format, displaytime, noerrors) {
 	var months = {
 		us : [
 			"January",
@@ -40,6 +41,12 @@ function simpleDate (date, format, noerrors) {
 			"Dezember"
 		]
 	};
+	if (displaytime !== true) {
+		displaytime = false;
+	}
+	if (noerrors !== true) {
+		noerrors = false;
+	}
 	// basic type checks:
 	if (typeof date === "string") {
 		date = new Date(date);
@@ -51,14 +58,18 @@ function simpleDate (date, format, noerrors) {
 	var d = date.getDate();
 	var m = date.getMonth();
 	var y = date.getFullYear();
+	var h = date.getHours();
+	var uh = date.getUTCHours();
+	var min = date.getMinutes();
+	var sec = date.getSeconds();
 	// the actual formatting:
 	switch (format) {
 		case "us":
-			return months.us[m] + " " + d + ", " + y;
+			return months.us[m] + " " + d + ", " + y + (displaytime ? " " + getTimeAs12(h, formatToTwoDigits(min), formatToTwoDigits(sec)) : "");
 		case "de":
-			return d + ". " + months.de[m] + " " + y;
+			return d + ". " + months.de[m] + " " + y + (displaytime ? " " + formatToTwoDigits(h) + ":" + formatToTwoDigits(min) + ":" + formatToTwoDigits(sec) : "");
 		case "iso":
-			return y + "-" + formatToTwoDigits(m + 1) + "-" + formatToTwoDigits(d);
+			return y + "-" + formatToTwoDigits(m + 1) + "-" + formatToTwoDigits(d) + (displaytime ? "T" + formatToTwoDigits(uh) + ":" + formatToTwoDigits(min) + ":" + formatToTwoDigits(sec) : "");
 		default:	// illegal format string
 			if (!noerrors) throw "simpleDate.js: invalid format string";
 			return;
@@ -73,5 +84,19 @@ function simpleDate (date, format, noerrors) {
 			return;
 		}
 		return val;
+	}
+	function getTimeAs12 (hours, minutes, seconds) {
+		if (hours === 0) {
+			return "12:" + minutes + ":" + seconds + " a.m.";
+		}
+		if (hours === 12) {
+			return "12:" + minutes + ":" + seconds + " p.m.";
+		}
+		var ending = "a.m.";
+		if (hours > 12) {
+			hours -= 12;
+			ending = "p.m.";
+		}
+		return formatToTwoDigits(hours) + ":" + minutes + ":" + seconds + " " + ending;
 	}
 }
