@@ -14,6 +14,6 @@ Passing *true* as the fourth parameter stops errors from being thrown when date 
 
 ```` js
 console.log(simpleDateTime("2013-12-04", "de"));    // output: 4. Dezember 2013
-console.log(simpleDateTime(new Date(), "en", true));    // output: August 20, 2015 04:31:16 p.m.
+console.log(simpleDateTime(new Date(), "us", true));    // output: August 20, 2015 04:31:16 p.m.
 console.log(simpleDateTime(new Date(2011,10,3)), "iso");    // output: 2011-11-03
 ````
