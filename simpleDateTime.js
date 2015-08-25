@@ -7,7 +7,7 @@
 * Copyright 2015 Adrian Wirth
 * Released under the MIT license
 *
-* Date: 2015-08-23
+* Date: 2015-08-20
 */
 
 function simpleDateTime (date, format, displaytime, noerrors) {
@@ -61,15 +61,14 @@ function simpleDateTime (date, format, displaytime, noerrors) {
 	var h = date.getHours();
 	var uh = date.getUTCHours();
 	var min = date.getMinutes();
-	var sec = date.getSeconds();
 	// the actual formatting:
 	switch (format) {
 		case "us":
-			return months.us[m] + " " + d + ", " + y + (displaytime ? " " + getTimeAs12(h, formatToTwoDigits(min), formatToTwoDigits(sec)) : "");
+			return months.us[m] + " " + d + ", " + y + (displaytime ? " at " + getTimeAs12(h, formatToTwoDigits(min)) : "");
 		case "de":
-			return d + ". " + months.de[m] + " " + y + (displaytime ? " " + formatToTwoDigits(h) + ":" + formatToTwoDigits(min) + ":" + formatToTwoDigits(sec) : "");
+			return d + ". " + months.de[m] + " " + y + (displaytime ? " um " + formatToTwoDigits(h) + ":" + formatToTwoDigits(min) : "");
 		case "iso":
-			return y + "-" + formatToTwoDigits(m + 1) + "-" + formatToTwoDigits(d) + (displaytime ? "T" + formatToTwoDigits(uh) + ":" + formatToTwoDigits(min) + ":" + formatToTwoDigits(sec) : "");
+			return y + "-" + formatToTwoDigits(m + 1) + "-" + formatToTwoDigits(d) + (displaytime ? "T" + formatToTwoDigits(uh) + ":" + formatToTwoDigits(min) : "");
 		default:	// illegal format string
 			if (!noerrors) throw "simpleDate.js: invalid format string";
 			return;
@@ -85,18 +84,18 @@ function simpleDateTime (date, format, displaytime, noerrors) {
 		}
 		return val;
 	}
-	function getTimeAs12 (hours, minutes, seconds) {
+	function getTimeAs12 (hours, minutes) {
 		if (hours === 0) {
-			return "12:" + minutes + ":" + seconds + " a.m.";
+			return "12:" + minutes + " a.m.";
 		}
 		if (hours === 12) {
-			return "12:" + minutes + ":" + seconds + " p.m.";
+			return "12:" + minutes + " p.m.";
 		}
 		var ending = "a.m.";
 		if (hours > 12) {
 			hours -= 12;
 			ending = "p.m.";
 		}
-		return formatToTwoDigits(hours) + ":" + minutes + ":" + seconds + " " + ending;
+		return formatToTwoDigits(hours) + ":" + minutes + " " + ending;
 	}
 }
