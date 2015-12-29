@@ -7,7 +7,7 @@
 * Copyright 2015 Adrian Wirth
 * Released under the MIT license
 *
-* Date: 2015-11-16
+* Date: 2015-12-29
 */
 
 function simpleDateTime (date, format, displaytime, noerrors) {
@@ -49,11 +49,12 @@ function simpleDateTime (date, format, displaytime, noerrors) {
 	}
 	// basic type checks:
 	if (typeof date === "string") {
-		// utc corrections:
-		date = date.replace(/ /g, "T");
+		// utc corrections: TODO something's wrong here
+		/* date = date.replace(/ /g, "T");
 		date += "Z";
 		date = new Date(date);
-		date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+		date.setMinutes(date.getMinutes() + date.getTimezoneOffset()); */
+		date = new Date(date);
 	}
 	if (toString.call(date) !== "[object Date]" || date.toString().toLowerCase() === "invalid date") {
 		if (!noerrors) throw "simpleDate.js: invalid date";
